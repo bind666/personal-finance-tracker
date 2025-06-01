@@ -1,11 +1,8 @@
 import { createBrowserRouter } from "react-router-dom";
 import { lazy, Suspense } from "react";
-
 import RootLayout from "../layouts/RootLayout";
 import DashboardLayout from "../layouts/DashboardLayout";
-
 import { AuthProvider } from "../context/AuthContext";
-
 import ProtectedRoute from "../components/common/ProtectedRoute";
 import PublicRoute from "../components/common/PublicRoute";
 
