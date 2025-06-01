@@ -1,12 +1,17 @@
 import { createBrowserRouter } from "react-router-dom";
+import { lazy, Suspense } from "react";
+
 import RootLayout from "../layouts/RootLayout";
 import DashboardLayout from "../layouts/DashboardLayout";
-import Dashboard from "../pages/Dashboard";
-import Profile from "../pages/Profile";
-import Auth from "../pages/Auth";
-import ProtectedRoute from "../components/common/ProtectedRoute";
+
 import { AuthProvider } from "../context/AuthContext";
+
+import ProtectedRoute from "../components/common/ProtectedRoute";
 import PublicRoute from "../components/common/PublicRoute";
+
+const Dashboard = lazy(() => import("../pages/Dashboard"));
+const Profile = lazy(() => import("../pages/Profile"));
+const Auth = lazy(() => import("../pages/Auth"));
 
 const router = createBrowserRouter([
   {
@@ -25,15 +30,31 @@ const router = createBrowserRouter([
           </ProtectedRoute>
         ),
         children: [
-          { path: "dashboard", element: <Dashboard /> },
-          { path: "profile", element: <Profile /> },
+          {
+            path: "dashboard",
+            element: (
+              <Suspense fallback={<p>Loading Dashboard...</p>}>
+                <Dashboard />
+              </Suspense>
+            ),
+          },
+          {
+            path: "profile",
+            element: (
+              <Suspense fallback={<p>Loading Profile...</p>}>
+                <Profile />
+              </Suspense>
+            ),
+          },
         ],
       },
       {
         path: "auth",
         element: (
           <PublicRoute>
-            <Auth />
+            <Suspense fallback={<p>Loading Auth...</p>}>
+              <Auth />
+            </Suspense>
           </PublicRoute>
         ),
       },
