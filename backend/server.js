@@ -13,7 +13,7 @@ app.use(express.urlencoded({ limit: "1MB", extended: true }));
 app.use(cookieParser())
 // app.use(cors());
 app.use(cors({
-    origin: ["http://localhost:5173", "http://localhost:5174"],
+    origin: ["http://localhost:5173", "http://localhost:5174", "https://personal-finance-tracker-rho-lime.vercel.app"],
     credentials: true,
 }))
 
