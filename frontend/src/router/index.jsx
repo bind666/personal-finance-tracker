@@ -6,6 +6,7 @@ import Profile from "../pages/Profile";
 import Auth from "../pages/Auth";
 import ProtectedRoute from "../components/common/ProtectedRoute";
 import { AuthProvider } from "../context/AuthContext";
+import PublicRoute from "../components/common/PublicRoute";
 
 const router = createBrowserRouter([
   {
@@ -30,7 +31,11 @@ const router = createBrowserRouter([
       },
       {
         path: "auth",
-        element: <Auth />,
+        element: (
+          <PublicRoute>
+            <Auth />
+          </PublicRoute>
+        ),
       },
     ],
   },
